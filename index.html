@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D_OBRA | Reporte Semanal Tresor Amelie</title>
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    
+    <link href="https://fonts.cdnfonts.com/css/geometos" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&family=Montserrat:wght@300;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --black: #000000; --dark-gray: #1a1a1a; --card-bg: rgba(28, 28, 28, 0.6); 
+            --accent-blue: #0099ff; --whatsapp-green: #25D366; --text-white: #ffffff;
+            --text-gray: #a0a0a0; --text-dim: #666666; --gray-track: #333333;
+        }
+        body {
+            font-family: 'Nunito Sans', sans-serif; background-color: #0a0a0a; color: var(--text-white);
+            margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden; min-height: 100vh;
+        }
+        .background-glow, .background-glow-2 {
+            position: fixed; width: 350px; height: 350px; filter: blur(130px); z-index: -1; border-radius: 50%;
+        }
+        .background-glow { top: 15%; left: -5%; background: #f0f8ff; opacity: 0.1; animation: floatGlow 12s infinite alternate ease-in-out; }
+        .background-glow-2 { bottom: 10%; right: -5%; background: #ffffff; opacity: 0.05; animation: floatGlow 18s infinite alternate-reverse ease-in-out; }
+        @keyframes floatGlow { 0% { transform: translate(0, 0); } 100% { transform: translate(40px, 60px); } }
+        h1, .card-title, .ring { font-family: 'Geometos', sans-serif; text-transform: uppercase; }
+        .brand-identifier { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; letter-spacing: 3px; margin: 10px 0; text-transform: uppercase; }
+        .brand-juice { font-weight: 300; } .brand-laab { font-weight: 800; }
+        .app-wrapper { width: 100%; max-width: 420px; padding-bottom: 120px; position: relative; z-index: 1; }
+        .top-bar { background-color: rgba(0,0,0,0.8); backdrop-filter: blur(10px); width: 100%; padding: 25px 0; display: flex; justify-content: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .logo-img { height: 40px; width: auto; }
+        header { padding: 35px 20px; text-align: center; }
+        header h1 { font-size: 1.8rem; margin: 0; letter-spacing: 2px; }
+        header p { color: var(--accent-blue); font-weight: 700; margin: 5px 0; font-size: 0.85rem; }
+        .card { background-color: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.06); margin: 0 15px 25px 15px; padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); transform-style: preserve-3d; transform: perspective(1000px); }
+        .card-title { font-size: 0.8rem; letter-spacing: 1.5px; color: var(--text-gray); margin-bottom: 20px; display: block; transform: translateZ(20px); }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; transform: translateZ(30px); }
+        .stat-box { text-align: center; }
+        .ring { width: 85px; height: 85px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin: 0 auto 10px; position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.3); padding: 6px; }
+        .ring-inner { background: #1a1a1a; width: 100%; height: 100%; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .partida-item { margin-bottom: 15px; transform: translateZ(20px); }
+        .partida-header { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px; font-weight: 600; }
+        .partida-track { background-color: rgba(255,255,255,0.08); height: 8px; border-radius: 4px; overflow: hidden; width: 100%; }
+        .partida-fill { background-color: var(--accent-blue); height: 100%; border-radius: 4px; width: 0%; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: 0 0 8px rgba(0, 153, 255, 0.7); }
+        .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; transform: translateZ(20px); }
+        .gallery-item { display: flex; flex-direction: column; text-align: center; cursor: pointer; transition: transform 0.3s ease; }
+        .img-thumb { aspect-ratio: 1/1; background: rgba(255,255,255,0.05); border-radius: 8px; object-fit: cover; width: 100%; border: 1px solid transparent; transition: border-color 0.3s ease; }
+        .img-caption { font-size: 0.65rem; color: var(--text-gray); margin-top: 6px; line-height: 1.2; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .wa-float { position: fixed; bottom: 100px; right: 20px; background-color: var(--whatsapp-green); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 1000; text-decoration: none; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        #lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); backdrop-filter: blur(8px); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; cursor: pointer; }
+        #lightbox img { max-width: 95%; max-height: 85%; border-radius: 8px; }
+        .list-style { border-left: 3px solid var(--accent-blue); padding-left: 15px; transform: translateZ(20px); }
+        
+        .activity-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; gap: 10px; }
+        .activity-item { font-size: 0.9rem; line-height: 1.4; width: 85%; margin-bottom: 0; }
+        .comment-btn { 
+            color: var(--text-gray); font-size: 1.3rem; background: rgba(255,255,255,0.05); 
+            border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; 
+            text-decoration: none; transition: all 0.3s ease; flex-shrink: 0;
+        }
+        .comment-btn:hover { background: var(--accent-blue); color: white; transform: scale(1.1); }
+
+        .footer-nav { position: fixed; bottom: 0; width: 100%; max-width: 420px; background: rgba(0,0,0,0.92); backdrop-filter: blur(15px); padding: 15px 20px; z-index: 900; border-top: 1px solid rgba(255,255,255,0.08); }
+        .progress-track { height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent-blue); width: 0%; box-shadow: 0 0 10px rgba(0, 153, 255, 0.5); transition: width 1.5s ease; }
+    </style>
+</head>
+<body>
+
+    <div class="background-glow"></div>
+    <div class="background-glow-2"></div>
+
+    <a id="wa-link" href="#" class="wa-float" target="_blank"><i class="ph-fill ph-whatsapp-logo"></i></a>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="active-img" src=""><span style="color: var(--text-gray); font-size: 0.8rem; margin-top: 15px;">TAP ANYWHERE TO CLOSE</span>
+    </div>
+
+    <div class="app-wrapper">
+        <div class="top-bar"><img src="LOGO D_OBRA.jpg" alt="D_OBRA" class="logo-img"></div>
+
+        <header class="reveal">
+            <h1>Reporte Semanal</h1>
+            <div class="brand-identifier"><span class="brand-juice">Tresor</span> <span class="brand-laab">Amelie</span></div>
+            <p id="week-label">Semana #0</p>
+        </header>
+
+        <div class="card reveal" data-tilt>
+            <span class="card-title">Avance de Obra</span>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div id="ring-real" class="ring"><div class="ring-inner" id="text-real" style="color: var(--accent-blue);">0%</div></div>
+                    <small>REAL</small>
+                </div>
+                <div class="stat-box">
+                    <div id="ring-plan" class="ring"><div class="ring-inner" id="text-plan">0%</div></div>
+                    <small>PLAN</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="card reveal" data-tilt><span class="card-title">Avance por Partida</span><div id="partidas-container"></div></div>
+        
+        <div class="card reveal" data-tilt>
+            <span class="card-title">Actividades Realizadas</span>
+            <p style="font-size: 0.7rem; color: var(--text-dim); margin-top: -15px; margin-bottom: 15px;">Toca el ícono de chat para comentar sobre una actividad.</p>
+            <div class="list-style" id="realizadas-container"></div>
+        </div>
+        
+        <div class="card reveal" data-tilt><span class="card-title">Evidencia Fotográfica</span><div class="gallery" id="galeria-container"></div></div>
+        
+        <div class="card reveal" data-tilt>
+            <span class="card-title">Actividades para esta semana</span>
+            <p style="font-size: 0.7rem; color: var(--text-dim); margin-top: -15px; margin-bottom: 15px;">Toca el ícono de chat si tienes dudas sobre lo que sigue.</p>
+            <div class="list-style" id="pendientes-container"></div>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <div style="display: flex; justify-content: space-between; font-size: 0.7rem; margin-bottom: 5px; font-weight: 700;">
+            <span>AVANCE GENERAL</span><span id="footer-pc">0%</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="footer-bar"></div></div>
+    </div>
+
+    <script>
+        /* ==========================================
+           PANEL DE CONTROL - EDITA AQUÍ CADA SEMANA
+           ========================================== */
+        const CONFIG = {
+            proyecto: "Tresor Amelie",
+            semana: "Semana 1",
+            avanceReal: 13,
+            avancePlaneado: 6, // Redondeado de 5.71% para mostrar un número entero visualmente más limpio
+            telefonoWP: "523311386600", 
+            whatsappMsg: "Hola, tengo una duda general sobre el Reporte Semanal de Tresor Amelie.",
+            
+            partidas: [
+                { nombre: "Preliminares", porcentaje: 100 },
+                { nombre: "Acabados", porcentaje: 25 },
+                { nombre: "Instalaciones", porcentaje: 0 },
+                { nombre: "Tablaroca", porcentaje: 0 },
+                { nombre: "Carpintería", porcentaje: 0 },
+                { nombre: "Herrería", porcentaje: 0 }
+            ],
+            
+            realizadas: [
+                "Retiro de mueble fijo con espejo",
+                "Retiro de luminarias y cables",
+                "Retiro de vinil",
+                "Resanes en muros",
+                "Retiro de muebles en planta alta"
+            ],
+            
+            pendientes: [
+                { texto: "Ruta Crítica: Aplicación de pintura Comex PRO (en proceso al 60%)", critico: true },
+                { texto: "Ruta Crítica: Canalización para voz y datos", critico: true },
+                { texto: "Muro de tablaroca a dos caras", critico: false },
+                { texto: "Base para maniquíes", critico: false }
+            ],
+            
+            galeria: [
+                { img: "ejemplo1.jpg", caption: "Retiro Muebles" },
+                { img: "ejemplo2.jpg", caption: "Resanes" },
+                { img: "ejemplo3.jpg", caption: "Pintura Muros" }
+            ]
+        };
+
+        /* ==========================================
+           LÓGICA DE RENDERIZADO (NO TOCAR)
+           ========================================== */
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('week-label').innerText = `${CONFIG.semana} • Proyecto Comercial`;
+            document.getElementById('text-real').innerText = `${CONFIG.avanceReal}%`;
+            document.getElementById('text-plan').innerText = `${CONFIG.avancePlaneado}%`;
+            document.getElementById('footer-pc').innerText = `${CONFIG.avanceReal}%`;
+            document.getElementById('footer-bar').style.width = `${CONFIG.avanceReal}%`;
+            document.getElementById('wa-link').href = `https://wa.me/${CONFIG.telefonoWP}?text=${encodeURIComponent(CONFIG.whatsappMsg)}`;
+            
+            document.getElementById('ring-real').style.background = `conic-gradient(var(--accent-blue) ${CONFIG.avanceReal}%, rgba(255,255,255,0.04) 0%)`;
+            document.getElementById('ring-plan').style.background = `conic-gradient(var(--text-white) ${CONFIG.avancePlaneado}%, rgba(255,255,255,0.04) 0%)`;
+
+            const pContainer = document.getElementById('partidas-container');
+            CONFIG.partidas.forEach(p => {
+                pContainer.innerHTML += `
+                    <div class="partida-item">
+                        <div class="partida-header"><span>${p.nombre}</span><span>${p.porcentaje}%</span></div>
+                        <div class="partida-track"><div class="partida-fill" style="width: ${p.porcentaje}%"></div></div>
+                    </div>`;
+            });
+
+            const crearLinkDuda = (actividad) => {
+                const mensaje = `Hola, tengo una duda sobre la actividad: "${actividad}" del reporte de ${CONFIG.semana} (${CONFIG.proyecto}).`;
+                return `https://wa.me/${CONFIG.telefonoWP}?text=${encodeURIComponent(mensaje)}`;
+            };
+
+            const rContainer = document.getElementById('realizadas-container');
+            CONFIG.realizadas.forEach(r => {
+                rContainer.innerHTML += `
+                    <div class="activity-row">
+                        <div class="activity-item">${r}</div>
+                        <a href="${crearLinkDuda(r)}" target="_blank" class="comment-btn" title="Preguntar sobre esto">
+                            <i class="ph-bold ph-chat-teardrop-text"></i>
+                        </a>
+                    </div>`;
+            });
+
+            const penContainer = document.getElementById('pendientes-container');
+            CONFIG.pendientes.forEach(p => {
+                const style = p.critico ? 'style="color: var(--accent-blue); font-weight: 700;"' : '';
+                penContainer.innerHTML += `
+                    <div class="activity-row">
+                        <div class="activity-item" ${style}>${p.texto}</div>
+                        <a href="${crearLinkDuda(p.texto)}" target="_blank" class="comment-btn" title="Preguntar sobre esto">
+                            <i class="ph-bold ph-chat-teardrop-text"></i>
+                        </a>
+                    </div>`;
+            });
+
+            const gContainer = document.getElementById('galeria-container');
+            CONFIG.galeria.forEach(g => {
+                gContainer.innerHTML += `
+                    <div class="gallery-item" onclick="openLightbox('${g.img}')">
+                        <img class="img-thumb" src="${g.img}" alt="${g.caption}">
+                        <div class="img-caption">${g.caption}</div>
+                    </div>`;
+            });
+
+            ScrollReveal().reveal('.reveal', { delay: 150, distance: '30px', origin: 'bottom', duration: 900, opacity: 0, scale: 0.96, easing: 'cubic-bezier(0.33, 1, 0.68, 1)' });
+            VanillaTilt.init(document.querySelectorAll(".card"), { max: 2, speed: 300, glare: true, "max-glare": 0.1 });
+        });
+
+        function openLightbox(url) { document.getElementById('active-img').src = url; document.getElementById('lightbox').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    </script>
+</body>
+</html>
