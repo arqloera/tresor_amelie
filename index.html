@@ -44,6 +44,13 @@
         .stat-box { text-align: center; }
         .ring { width: 85px; height: 85px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin: 0 auto 10px; position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.3); padding: 6px; }
         .ring-inner { background: #1a1a1a; width: 100%; height: 100%; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        
+        .dates-box { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); transform: translateZ(25px); display: flex; flex-direction: column; gap: 8px; }
+        .date-row { display: flex; justify-content: space-between; font-size: 0.8rem; }
+        .date-label { color: var(--text-gray); }
+        .date-value { font-weight: 700; color: var(--text-white); }
+        .date-value.highlight { color: var(--accent-blue); }
+
         .partida-item { margin-bottom: 15px; transform: translateZ(20px); }
         .partida-header { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px; font-weight: 600; }
         .partida-track { background-color: rgba(255,255,255,0.08); height: 8px; border-radius: 4px; overflow: hidden; width: 100%; }
@@ -103,6 +110,17 @@
                     <small>PLAN</small>
                 </div>
             </div>
+
+            <div class="dates-box">
+                <div class="date-row">
+                    <span class="date-label">FIN SEGÚN PROGRAMA:</span>
+                    <span class="date-value" id="val-fecha-plan">-</span>
+                </div>
+                <div class="date-row">
+                    <span class="date-label">ESTIMADO SEGÚN RITMO:</span>
+                    <span class="date-value highlight" id="val-fecha-ritmo">-</span>
+                </div>
+            </div>
         </div>
 
         <div class="card reveal" data-tilt><span class="card-title">Avance por Partida</span><div id="partidas-container"></div></div>
@@ -137,7 +155,9 @@
             proyecto: "Tresor Amelie",
             semana: "Semana 1",
             avanceReal: 13,
-            avancePlaneado: 6, // Redondeado de 5.71% para mostrar un número entero visualmente más limpio
+            avancePlaneado: 6, 
+            fechaPrograma: "09 de Octubre, 2026", 
+            fechaRitmo: "07 de Octubre, 2026",   // Actualizado según tu indicación
             telefonoWP: "523311386600", 
             whatsappMsg: "Hola, tengo una duda general sobre el Reporte Semanal de Tresor Amelie.",
             
@@ -179,6 +199,8 @@
             document.getElementById('week-label').innerText = `${CONFIG.semana} • Proyecto Comercial`;
             document.getElementById('text-real').innerText = `${CONFIG.avanceReal}%`;
             document.getElementById('text-plan').innerText = `${CONFIG.avancePlaneado}%`;
+            document.getElementById('val-fecha-plan').innerText = CONFIG.fechaPrograma;
+            document.getElementById('val-fecha-ritmo').innerText = CONFIG.fechaRitmo;
             document.getElementById('footer-pc').innerText = `${CONFIG.avanceReal}%`;
             document.getElementById('footer-bar').style.width = `${CONFIG.avanceReal}%`;
             document.getElementById('wa-link').href = `https://wa.me/${CONFIG.telefonoWP}?text=${encodeURIComponent(CONFIG.whatsappMsg)}`;
