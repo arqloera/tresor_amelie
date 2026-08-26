@@ -42,13 +42,23 @@
         .card-title { font-size: 0.8rem; letter-spacing: 1.5px; color: var(--text-gray); margin-bottom: 20px; display: block; transform: translateZ(20px); }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; transform: translateZ(30px); }
         .stat-box { text-align: center; }
-        .ring { width: 85px; height: 85px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin: 0 auto 10px; position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.3); padding: 6px; }
-        .ring-inner { background: #1a1a1a; width: 100%; height: 100%; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .stat-box small { font-size: 0.75rem; letter-spacing: 1px; color: var(--text-white); font-weight: 700; display: block; margin-top: 10px; }
+        .ring { width: 85px; height: 85px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin: 0 auto; position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.3); padding: 6px; }
+        .ring-inner { background: #1a1a1a; width: 100%; height: 100%; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
         
-        .dates-box { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); transform: translateZ(25px); display: flex; flex-direction: column; gap: 8px; }
-        .date-row { display: flex; justify-content: space-between; font-size: 0.8rem; }
-        .date-label { color: var(--text-gray); }
-        .date-value { font-weight: 700; color: var(--text-white); }
+        /* Estructura idéntica a la referencia de la imagen para las fechas */
+        .dates-grid { 
+            margin-top: 25px; 
+            padding-top: 20px; 
+            border-top: 1px solid rgba(255,255,255,0.08); 
+            transform: translateZ(25px); 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+        }
+        .date-col { display: flex; flex-direction: column; gap: 4px; }
+        .date-label { font-size: 0.75rem; color: var(--text-gray); }
+        .date-value { font-size: 0.95rem; font-weight: 700; color: var(--text-white); }
         .date-value.highlight { color: var(--accent-blue); }
 
         .partida-item { margin-bottom: 15px; transform: translateZ(20px); }
@@ -111,13 +121,14 @@
                 </div>
             </div>
 
-            <div class="dates-box">
-                <div class="date-row">
-                    <span class="date-label">FIN SEGÚN PROGRAMA:</span>
+            <!-- BLOQUE DE FECHAS ESTILO TARJETA -->
+            <div class="dates-grid">
+                <div class="date-col">
+                    <span class="date-label">Entrega Programa</span>
                     <span class="date-value" id="val-fecha-plan">-</span>
                 </div>
-                <div class="date-row">
-                    <span class="date-label">ESTIMADO SEGÚN RITMO:</span>
+                <div class="date-col">
+                    <span class="date-label">Entrega Estimada</span>
                     <span class="date-value highlight" id="val-fecha-ritmo">-</span>
                 </div>
             </div>
@@ -155,9 +166,9 @@
             proyecto: "Tresor Amelie",
             semana: "Semana 1",
             avanceReal: 13,
-            avancePlaneado: 6, 
-            fechaPrograma: "09 de Octubre, 2026", 
-            fechaRitmo: "07 de Octubre, 2026",   // Actualizado según tu indicación
+            avancePlaneado: 5.71, 
+            fechaPrograma: "09 Oct, 2026", 
+            fechaEstimada: "07 Oct, 2026",
             telefonoWP: "523311386600", 
             whatsappMsg: "Hola, tengo una duda general sobre el Reporte Semanal de Tresor Amelie.",
             
@@ -200,7 +211,7 @@
             document.getElementById('text-real').innerText = `${CONFIG.avanceReal}%`;
             document.getElementById('text-plan').innerText = `${CONFIG.avancePlaneado}%`;
             document.getElementById('val-fecha-plan').innerText = CONFIG.fechaPrograma;
-            document.getElementById('val-fecha-ritmo').innerText = CONFIG.fechaRitmo;
+            document.getElementById('val-fecha-ritmo').innerText = CONFIG.fechaEstimada;
             document.getElementById('footer-pc').innerText = `${CONFIG.avanceReal}%`;
             document.getElementById('footer-bar').style.width = `${CONFIG.avanceReal}%`;
             document.getElementById('wa-link').href = `https://wa.me/${CONFIG.telefonoWP}?text=${encodeURIComponent(CONFIG.whatsappMsg)}`;
