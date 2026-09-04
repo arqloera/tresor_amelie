@@ -64,13 +64,16 @@
         .partida-header { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px; font-weight: 600; }
         .partida-track { background-color: rgba(255,255,255,0.08); height: 8px; border-radius: 4px; overflow: hidden; width: 100%; }
         .partida-fill { background-color: var(--accent-blue); height: 100%; border-radius: 4px; width: 0%; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: 0 0 8px rgba(0, 153, 255, 0.7); }
+        
+        /* Ajuste para visualizar correctamente las imágenes PNG completas */
         .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; transform: translateZ(20px); }
-        .gallery-item { display: flex; flex-direction: column; text-align: center; cursor: pointer; transition: transform 0.3s ease; }
-        .img-thumb { aspect-ratio: 1/1; background: rgba(255,255,255,0.05); border-radius: 8px; object-fit: cover; width: 100%; border: 1px solid transparent; transition: border-color 0.3s ease; }
+        .gallery-item { display: flex; flex-direction: column; text-align: center; cursor: pointer; transition: transform 0.3s ease; background: rgba(0,0,0,0.3); border-radius: 8px; padding: 5px; }
+        .img-thumb { width: 100%; height: 80px; background: #000; border-radius: 6px; object-fit: contain; border: 1px solid rgba(255,255,255,0.1); }
         .img-caption { font-size: 0.65rem; color: var(--text-gray); margin-top: 6px; line-height: 1.2; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        
         .wa-float { position: fixed; bottom: 100px; right: 20px; background-color: var(--whatsapp-green); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 1000; text-decoration: none; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         #lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); backdrop-filter: blur(8px); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; cursor: pointer; }
-        #lightbox img { max-width: 95%; max-height: 85%; border-radius: 8px; }
+        #lightbox img { max-width: 95%; max-height: 85%; border-radius: 8px; object-fit: contain; }
         .list-style { border-left: 3px solid var(--accent-blue); padding-left: 15px; transform: translateZ(20px); }
         
         .activity-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; gap: 10px; }
@@ -191,16 +194,16 @@
             pendientes: [
                 { texto: "Ruta Crítica: Continuar con aplicación de pintura y acabados en muros", critico: true },
                 { texto: "Ruta Crítica: Preparación para canalizaciones y salidas eléctricas adicionales", critico: true },
-                { texto: "Instalación de muros de tablaroca y bases", critico: false },
+                { texto: "Definición de espacios entre cremalleras y accesorios para montajes de ropa", critico: false },
                 { texto: "Revisión de elementos de carpintería y herrería", critico: false }
             ],
             
             galeria: [
-                { img: "foto1.jpg", caption: "Demolicion de oficina" },
-                { img: "foto2.jpg", caption: "Recepciòn de piso" },
-                { img: "foto3.jpg", caption: "Revision de centro de cargas" },
-                { img: "foto4.jpg", caption: "Salida para voz y datos" },
-                { img: "foto5.jpg", caption: "Salidas electricas" }
+                { img: "foto1.png", caption: "Demolicion de oficina" },
+                { img: "foto2.png", caption: "Recepciòn de piso" },
+                { img: "foto3.png", caption: "Revision de centro de cargas" },
+                { img: "foto4.png", caption: "Salida para voz y datos" },
+                { img: "foto5.png", caption: "Salidas electricas" }
             ]
         };
 
